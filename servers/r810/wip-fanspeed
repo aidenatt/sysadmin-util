@@ -1,0 +1,20 @@
+# Enable IPMI in iDrac (During boot)
+# Install ipmitool
+#
+# ipmitool -I lanplus -H <idrac IP> -U <user> -P <pass> <command>
+# 					(default: root:calvin)
+#
+# Commands:
+#
+# Manual/Static Fan Speed: raw 0x30 0x30 0x01 0x00 
+# Disable/Enable Automatic Fan Control: raw 0x30 0x30 0x01 0x01
+#
+# 3000 RPM: raw 0x30 0x30 0x02 0xff 0x10
+# 2520 RPM: raw 0x30 0x30 0x02 0xff 0x0a
+# 2400 RPM: raw 0x30 0x30 0x02 0xff 0x09
+#
+# List all output: sdr elist all
+# List Temps: sdr type temperature | grep Ambient | grep degrees | grep -Po '\d{2}' | tail -1
+#
+#
+#
