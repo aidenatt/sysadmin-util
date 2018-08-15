@@ -1,7 +1,4 @@
-#1 = 0x01
-#100 = 0x64
-
-if [ -z "$2" ] && [ -z "$3" ] ; then
+if [ -z "$2" ] && [ -z "$3" ] ; then # uses default credentials if $2 && $3 = null
     username=root
     password=calvin
 else
@@ -9,7 +6,8 @@ else
     password=$3
 fi
 
-if [ $1 -lt 100 -a $1 -gt 0 ] ; then
+if [[ $1 -lt 100 && $1 -gt 0 ]] ; then
+
     speed=$(eval printf '%X' $1) # Convert input to hex
     errormessage=$( ipmitool -I lanplus -H 192.168.1.180 -U $username -P $password raw 0x30 0x30 0x02 0xff 0x$speed 2>&1)
     if [[ $errormessage = *"Error:"* ]] ; then
